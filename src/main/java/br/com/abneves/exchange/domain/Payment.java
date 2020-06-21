@@ -12,7 +12,7 @@ public class Payment {
     private final Integer productsValue;
     private final Integer totalReceived;
 
-    Payment(final Long paymentId, final Integer productsValue, final Integer totalReceived) {
+    private Payment(final Long paymentId, final Integer productsValue, final Integer totalReceived) {
         this.paymentId = paymentId;
         this.productsValue = productsValue;
         this.totalReceived = totalReceived;

@@ -13,7 +13,7 @@ public class Exchange {
 
     private final Payment payment;
 
-    Exchange(Payment payment) {
+    private Exchange(Payment payment) {
         this.payment = payment;
     }
 

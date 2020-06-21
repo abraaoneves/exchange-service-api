@@ -13,7 +13,7 @@ public class Payer {
     private final Long payerId;
     private final List<Payment> payments;
 
-    Payer(final Long payerId, final List<Payment> payments) {
+    private Payer(final Long payerId, final List<Payment> payments) {
         this.payerId = payerId;
         this.payments = payments;
     }
