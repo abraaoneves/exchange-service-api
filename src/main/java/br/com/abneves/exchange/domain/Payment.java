@@ -34,11 +34,11 @@ public class Payment {
         return (this.totalReceived > 0 && this.totalReceived >= this.productsValue);
     }
 
-    protected Integer getProductsValue() {
+    public Integer getProductsValue() {
         return productsValue;
     }
 
-    protected Integer getTotalReceived() {
+    public Integer getTotalReceived() {
         return totalReceived;
     }
 
