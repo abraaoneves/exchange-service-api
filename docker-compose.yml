@@ -1,0 +1,33 @@
+---
+version: '3.1'
+
+services:
+  db:
+    image: "postgres:12"
+    restart: unless-stopped
+    container_name: "exchange-db"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: exchange_db
+    ports:
+      - "54320:5432"
+    volumes:
+      - /home/abneves/Projects/Docker/Postgres:/var/lib/postgresql/data
+    networks:
+      - postgres-compose-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    container_name: "exchange-db-client"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "abraaoborgesneves@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - 15432:80
+    networks:
+      - postgres-compose-network
+networks:
+  postgres-compose-network:
+    driver: bridge
