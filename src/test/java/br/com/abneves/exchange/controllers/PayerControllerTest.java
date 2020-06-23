@@ -25,7 +25,7 @@ public class PayerControllerTest {
 
     @BeforeEach
     void setMockOutPut() {
-        when(service.listByPayer(1L, PageRequest.of(0, 4))).thenReturn(PaymentCreator.createListOfPayments());
+        when(service.listByPayer(1L, PageRequest.of(0, 5))).thenReturn(PaymentCreator.createListOfPayments());
     }
 
     @Test
@@ -39,14 +39,14 @@ public class PayerControllerTest {
 
         assertThat(paymentsResponse).isNotNull();
 
-        assertThat(paymentsResponse.getPayments())
+        assertThat(paymentsResponse.getContent())
                 .isNotEmpty()
                 .hasSize(expectedListLength);
 
-        assertThat(paymentsResponse.getPayments()
+        assertThat(paymentsResponse.getContent()
                 .get(0).getProductsValue()).isEqualTo(expectedFirstPaymentProductValue);
 
-        assertThat(paymentsResponse.getPayments()
+        assertThat(paymentsResponse.getContent()
                 .get(2).getTotalReceived()).isEqualTo(expectedFThirdPaymentTotalReceivedValue);
     }
 
