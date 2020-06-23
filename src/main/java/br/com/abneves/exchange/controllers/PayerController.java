@@ -24,6 +24,7 @@ public class PayerController {
 
     @GetMapping("/{payerId}/payments")
     public ResponseEntity<PaymentsResponse> listOfPaymentsFromPayer(@PathVariable("payerId") final Long payer) {
+        //TODO: Adicionar paginacao.
         final var payments = paymentService.listByPayer(payer);
         final var response = payments.stream().map(PaymentResponse::of).collect(Collectors.toList());
 
