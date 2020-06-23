@@ -1,48 +1,41 @@
 package br.com.abneves.exchange.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
 /**
  * Payment
  *
  * @author Abraao Neves
  * @version 0.0.1 21-06-2020
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "Payment")
+@Table(name = "payments")
 public class Payment {
 
-    private final Long paymentId;
-    private final Integer productsValue;
-    private final Integer totalReceived;
+    @Id
+    @GeneratedValue
+    private Long paymentId;
 
-    private Payment(final Long paymentId, final Integer productsValue, final Integer totalReceived) {
-        this.paymentId = paymentId;
-        this.productsValue = productsValue;
-        this.totalReceived = totalReceived;
-    }
+    @Column(name = "products_value")
+    private Integer productsValue;
 
-    /**
-     * Static construct instance class with basic values
-     *
-     * @param paymentId
-     * @param productsValue
-     * @param totalReceived
-     * @return
-     */
-    public static Payment of(final Long paymentId, final Integer productsValue, final Integer totalReceived) {
-        return new Payment(paymentId, productsValue, totalReceived);
-    }
+    @Column(name = "total_received")
+    private Integer totalReceived;
+
+    @ManyToOne
+    @JoinColumn(name = "payer_fk_id", nullable = false)
+    private Payer payer;
 
     protected boolean isAllowedToExchange() {
         return (this.totalReceived > 0 && this.totalReceived >= this.productsValue);
-    }
-
-    public Integer getProductsValue() {
-        return productsValue;
-    }
-
-    public Integer getTotalReceived() {
-        return totalReceived;
-    }
-
-    public Long getPaymentId() {
-        return paymentId;
     }
 }

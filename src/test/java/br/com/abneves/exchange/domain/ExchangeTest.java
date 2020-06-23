@@ -10,7 +10,12 @@ public class ExchangeTest {
         final var customerPaymentValue = 100;
         final var productValue = 90;
 
-        final var payment = Payment.of(1L, productValue, customerPaymentValue);
+        final var payment = Payment.builder()
+                .paymentId(1L)
+                .productsValue(productValue)
+                .totalReceived(customerPaymentValue)
+                .build();
+
         final var exchange = Exchange.of(payment);
 
         Assertions.assertTrue(payment.isAllowedToExchange());
@@ -22,7 +27,12 @@ public class ExchangeTest {
         final var customerPaymentValue = 100;
         final var productValue = 100;
 
-        final var payment = Payment.of(1L, productValue, customerPaymentValue);
+        final var payment = Payment.builder()
+                .paymentId(1L)
+                .productsValue(productValue)
+                .totalReceived(customerPaymentValue)
+                .build();
+
         final var exchange = Exchange.of(payment);
 
         Assertions.assertTrue(payment.isAllowedToExchange());
@@ -34,7 +44,12 @@ public class ExchangeTest {
         final var customerPaymentValue = 90;
         final var productValue = 100;
 
-        final var payment = Payment.of(1L, productValue, customerPaymentValue);
+        final var payment = Payment.builder()
+                .paymentId(1L)
+                .productsValue(productValue)
+                .totalReceived(customerPaymentValue)
+                .build();
+
         final var exchange = Exchange.of(payment);
 
 
