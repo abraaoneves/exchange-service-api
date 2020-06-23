@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,7 +25,7 @@ public class PayerControllerTest {
 
     @BeforeEach
     void setMockOutPut() {
-        when(service.listByPayer(1L)).thenReturn(PaymentCreator.createListOfPayments());
+        when(service.listByPayer(1L, PageRequest.of(0, 4))).thenReturn(PaymentCreator.createListOfPayments());
     }
 
     @Test
@@ -34,7 +35,7 @@ public class PayerControllerTest {
         final var expectedFirstPaymentProductValue = 10;
         final var expectedFThirdPaymentTotalReceivedValue = 45;
 
-        final var paymentsResponse = controller.listOfPaymentsFromPayer(1L).getBody();
+        final var paymentsResponse = controller.listOfPaymentsFromPayer(1L, 0).getBody();
 
         assertThat(paymentsResponse).isNotNull();
 

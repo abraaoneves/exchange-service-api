@@ -1,36 +1,21 @@
 package br.com.abneves.exchange.domain.services.implementation;
 
 import br.com.abneves.exchange.domain.Payment;
-import br.com.abneves.exchange.domain.repositories.PayerRepository;
+import br.com.abneves.exchange.domain.repositories.PaymentRepository;
 import br.com.abneves.exchange.domain.services.PaymentService;
-import org.springframework.http.HttpStatus;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
 
-    private final PayerRepository repository;
-
-    public PaymentServiceImpl(PayerRepository repository) {
-        this.repository = repository;
-    }
+    private final PaymentRepository repository;
 
     @Override
-    public List<Payment> listByPayer(Long payerId) {
-        final var payer = repository
-                .findById(payerId)
-                .orElseThrow(() -> new PayerNotFoundException("Payer not found."));
-
-        return payer.getPayments();
-    }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public static class PayerNotFoundException extends RuntimeException {
-        public PayerNotFoundException(String message) {
-            super(message);
-        }
+    public Page<Payment> listByPayer(Long payerId, Pageable pageable) {
+        return repository.findAllByPayerPayerId(payerId, pageable);
     }
 }

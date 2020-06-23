@@ -1,9 +1,9 @@
 package br.com.abneves.exchange.domain.services;
 
 import br.com.abneves.exchange.domain.Payment;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface PaymentService {
-    List<Payment> listByPayer(final Long payerId);
+    Page<Payment> listByPayer(final Long payerId, final Pageable pageable);
 }
