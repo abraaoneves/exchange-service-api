@@ -1,5 +1,11 @@
 package br.com.abneves.exchange.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -8,32 +14,18 @@ import java.util.List;
  * @author Abraao Neves
  * @version 0.0.1 21-06-2020
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "payers")
+@Entity(name = "Payer")
 public class Payer {
 
-    private final Long payerId;
-    private final List<Payment> payments;
+    @Id
+    @GeneratedValue
+    private Long payerId;
 
-    private Payer(final Long payerId, final List<Payment> payments) {
-        this.payerId = payerId;
-        this.payments = payments;
-    }
-
-    /**
-     * Static construct instance class with basic values
-     *
-     * @param paymentId
-     * @param payments
-     * @return
-     */
-    public static Payer of(final Long paymentId, final List<Payment> payments) {
-        return new Payer(paymentId, payments);
-    }
-
-    public Long getPayerId() {
-        return payerId;
-    }
-
-    public List<Payment> getPayments() {
-        return payments;
-    }
+    @OneToMany(mappedBy = "payer")
+    private List<Payment> payments;
 }

@@ -13,8 +13,16 @@ public class PayerTest {
         final var customerPaymentValue = 100;
         final var productValue = 90;
 
-        final var payment = Payment.of(1L, productValue, customerPaymentValue);
-        final var payer = Payer.of(1L, List.of(payment));
+        final var payment = Payment.builder()
+                .paymentId(1L)
+                .productsValue(productValue)
+                .totalReceived(customerPaymentValue)
+                .build();
+
+        final var payer = Payer.builder()
+                .payerId(1L)
+                .payments(List.of(payment))
+                .build();
 
         Assertions.assertFalse(payer.getPayments().isEmpty());
         Assertions.assertEquals(1, payer.getPayerId());
@@ -23,7 +31,10 @@ public class PayerTest {
 
     @Test
     public void shouldBeValidateRightAndSameValuesForPayment() {
-        final var payer = Payer.of(1L, Collections.emptyList());
+        final var payer = Payer.builder()
+                .payerId(1L)
+                .payments(Collections.emptyList())
+                .build();
 
         Assertions.assertTrue(payer.getPayments().isEmpty());
         Assertions.assertEquals(1, payer.getPayerId());
