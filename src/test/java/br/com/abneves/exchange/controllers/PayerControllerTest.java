@@ -25,7 +25,7 @@ public class PayerControllerTest {
 
     @BeforeEach
     void setMockOutPut() {
-        when(service.listByPayer(1L, PageRequest.of(0, 5))).thenReturn(PaymentCreator.createListOfPayments());
+        when(service.listByPayer(1L, PageRequest.of(0, 5))).thenReturn(PaymentCreator.createPagesOfPaymentList());
     }
 
     @Test
