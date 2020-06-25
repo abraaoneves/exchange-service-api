@@ -21,8 +21,8 @@ public class CoinCombination {
         return new CoinCombination(new ArrayList<>());
     }
 
-    public void findCoinsCombinations(int exchangeValue) {
-        if (exchangeValue == 0) {
+    public void findCoinsCombinations(Integer exchangeValue) {
+        if (exchangeValue <= 0) {
             throw new CoinExchangeCombinationInvalid();
         }
 
