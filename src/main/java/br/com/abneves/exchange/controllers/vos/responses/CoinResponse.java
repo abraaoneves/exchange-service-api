@@ -1,4 +1,4 @@
-package br.com.abneves.exchange.controllers.vos;
+package br.com.abneves.exchange.controllers.vos.responses;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

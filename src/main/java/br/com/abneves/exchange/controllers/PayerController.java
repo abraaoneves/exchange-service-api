@@ -1,9 +1,9 @@
 package br.com.abneves.exchange.controllers;
 
 import br.com.abneves.exchange.controllers.decorators.PaymentPageDecorator;
-import br.com.abneves.exchange.controllers.vos.ExchangeRootResponse;
-import br.com.abneves.exchange.controllers.vos.PaymentRequest;
-import br.com.abneves.exchange.controllers.vos.PaymentResponse;
+import br.com.abneves.exchange.controllers.vos.responses.ExchangeRootResponse;
+import br.com.abneves.exchange.controllers.vos.requests.PaymentRequest;
+import br.com.abneves.exchange.controllers.vos.requests.PaymentResponse;
 import br.com.abneves.exchange.domain.Exchange;
 import br.com.abneves.exchange.domain.services.PaymentService;
 import org.springframework.data.domain.PageImpl;

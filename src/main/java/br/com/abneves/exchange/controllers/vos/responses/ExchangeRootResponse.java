@@ -1,4 +1,4 @@
-package br.com.abneves.exchange.controllers.vos;
+package br.com.abneves.exchange.controllers.vos.responses;
 
 import br.com.abneves.exchange.domain.Exchange;
 import lombok.AccessLevel;

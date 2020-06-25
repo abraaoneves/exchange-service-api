@@ -1,4 +1,4 @@
-package br.com.abneves.exchange.controllers.vos;
+package br.com.abneves.exchange.controllers.vos.requests;
 
 import lombok.Data;
 

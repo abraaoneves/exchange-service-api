@@ -1,6 +1,6 @@
 package br.com.abneves.exchange.domain.services.implementation;
 
-import br.com.abneves.exchange.controllers.vos.PaymentRequest;
+import br.com.abneves.exchange.controllers.vos.requests.PaymentRequest;
 import br.com.abneves.exchange.domain.Payer;
 import br.com.abneves.exchange.domain.Payment;
 import br.com.abneves.exchange.domain.repositories.PaymentRepository;

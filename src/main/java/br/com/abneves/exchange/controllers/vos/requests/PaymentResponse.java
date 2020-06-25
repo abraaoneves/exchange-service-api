@@ -1,4 +1,4 @@
-package br.com.abneves.exchange.controllers.vos;
+package br.com.abneves.exchange.controllers.vos.requests;
 
 import br.com.abneves.exchange.domain.Payment;
 
