@@ -1,7 +1,10 @@
 package br.com.abneves.exchange.controllers;
 
 import br.com.abneves.exchange.controllers.decorators.PaymentPageDecorator;
+import br.com.abneves.exchange.controllers.vos.ExchangeRootResponse;
+import br.com.abneves.exchange.controllers.vos.PaymentRequest;
 import br.com.abneves.exchange.controllers.vos.PaymentResponse;
+import br.com.abneves.exchange.domain.Exchange;
 import br.com.abneves.exchange.domain.services.PaymentService;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -9,10 +12,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/payers", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/payers",
+        produces = MediaType.APPLICATION_JSON_VALUE)
 public class PayerController {
 
     private static final int TOTAL_OF_PAGES = 5;
@@ -35,4 +40,20 @@ public class PayerController {
         final var paymentPageDecorator = new PaymentPageDecorator<>(new PageImpl<>(paymentResponseList));
         return ResponseEntity.ok(paymentPageDecorator);
     }
+
+    @PostMapping(value = "/{payerId}/payments", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ExchangeRootResponse> doPayment(@PathVariable("payerId") final Long payer,
+                                                          @RequestBody @Valid final PaymentRequest paymentRequest) {
+        final var payment = paymentService.pay(payer, paymentRequest);
+        final var exchange = Exchange.of(payment);
+        final var response = ExchangeRootResponse.builder()
+                .exchange(exchange)
+                .paymentId(payment.getPaymentId())
+                .productsValue(payment.getProductsValue())
+                .totalReceived(payment.getTotalReceived())
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
 }
