@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PaymentCreator {
 
-    public static Page<Payment> createListOfPayments() {
+    public static Page<Payment> createPagesOfPaymentList() {
         final var payments = List.of(createPayment(1L, 10, 15),
                 createPayment(2L, 20, 25),
                 createPayment(3L, 30, 45),
