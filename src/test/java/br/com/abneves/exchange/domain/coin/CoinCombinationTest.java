@@ -10,7 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CoinCombinationTest {
 
     @Test
-    @Order(1)
     @Timeout(value = 5, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Return a list of 3 combinations for valid exchange value")
     public void listOfCombination_shouldBeReturnListOfThreeCombinationsOfCoins_whenValidExchangeValueIsUsed() {
@@ -24,7 +23,19 @@ class CoinCombinationTest {
     }
 
     @Test
-    @Order(2)
+    @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
+    @DisplayName("Should throw exception when 1 for exchange value is set.")
+    public void shouldThrowException_whenOneExchangeValueIsSet() {
+        final var coinCombination = CoinCombination.of();
+        coinCombination.findCoinsCombinations(1);
+
+        assertThat(coinCombination.getCombinations())
+                .hasSize(1)
+                .first()
+                .extracting(List::size).isEqualTo(1);
+    }
+
+    @Test
     @Timeout(value = 150, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Return a list of 3 combinations for valid and big exchange value")
     public void listOfCombination_shouldBeReturnListOfThreeCombinationsOfCoins_whenValidAndBigExchangeValueIsUsed() {
@@ -36,7 +47,6 @@ class CoinCombinationTest {
     }
 
     @Test
-    @Order(3)
     @Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Return a list of 3 combinations for valid and biggest exchange value")
     public void listOfCombination_shouldBeReturnListOfThreeCombinationsOfCoins_whenValidAndBiggestExchangeValueIsUsed() {
@@ -48,7 +58,6 @@ class CoinCombinationTest {
     }
 
     @Test
-    @Order(4)
     @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Should throw exception when ZERO value for exchange is set.")
     public void shouldThrowException_whenZeroExchangeValueIsSet() {
@@ -58,7 +67,15 @@ class CoinCombinationTest {
     }
 
     @Test
-    @Order(5)
+    @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
+    @DisplayName("Should throw exception when ZERO value for exchange is set.")
+    public void shouldThrowException_whenLessThenZeroExchangeValueIsSet() {
+        final var coinCombination = CoinCombination.of();
+
+        Assertions.assertThrows(CoinCombination.CoinExchangeCombinationInvalid.class, () -> coinCombination.findCoinsCombinations(-1));
+    }
+
+    @Test
     @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Should throw exception when BIGGER value for exchange is set.")
     public void shouldThrowException_whenBiggerExchangeValueIsSet() {
