@@ -1,5 +1,6 @@
 package br.com.abneves.exchange.domain;
 
+import br.com.abneves.exchange.domain.coin.CoinOption;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -27,6 +28,10 @@ public class Exchange {
         }
 
         throw new InvalidPaymentForExchange("Invalid value for exchange.");
+    }
+
+    public CoinOption getCoinOption() {
+        return CoinOption.of(this.getExchange());
     }
 
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
