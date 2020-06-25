@@ -1,7 +1,9 @@
 package br.com.abneves.exchange.controllers.vos.requests;
 
 import br.com.abneves.exchange.domain.Payment;
+import lombok.Getter;
 
+@Getter
 public class PaymentResponse {
 
     private final Long paymentId;
@@ -20,17 +22,5 @@ public class PaymentResponse {
 
     public static PaymentResponse of(final Payment payment) {
         return new PaymentResponse(payment.getPaymentId(), payment.getProductsValue(), payment.getTotalReceived());
-    }
-
-    public Long getPaymentId() {
-        return paymentId;
-    }
-
-    public Integer getProductsValue() {
-        return productsValue;
-    }
-
-    public Integer getTotalReceived() {
-        return totalReceived;
     }
 }
