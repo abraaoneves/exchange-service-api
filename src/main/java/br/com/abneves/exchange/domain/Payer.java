@@ -23,7 +23,7 @@ import java.util.List;
 public class Payer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long payerId;
 
     @OneToMany(mappedBy = "payer")

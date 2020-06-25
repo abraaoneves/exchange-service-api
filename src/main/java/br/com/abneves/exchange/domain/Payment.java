@@ -22,7 +22,7 @@ import javax.persistence.*;
 public class Payment {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long paymentId;
 
     @Column(name = "products_value")
@@ -31,7 +31,7 @@ public class Payment {
     @Column(name = "total_received")
     private Integer totalReceived;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payer_fk_id", nullable = false)
     private Payer payer;
 
