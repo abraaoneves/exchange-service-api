@@ -1,6 +1,6 @@
 package br.com.abneves.exchange.domain.usecases.implementation;
 
-import br.com.abneves.exchange.configuration.UseCase;
+import br.com.abneves.exchange.configuration.annotations.UseCase;
 import br.com.abneves.exchange.controllers.vos.requests.PaymentRequest;
 import br.com.abneves.exchange.domain.Payment;
 import br.com.abneves.exchange.domain.services.PayerService;
@@ -48,7 +48,7 @@ public class EffectPaymentUseCaseImpl implements EffectPaymentUseCase {
     }
 
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public static class InvalidPaymentOperationException extends RuntimeException {
+    public static class InvalidPaymentOperationException extends IllegalArgumentException {
         private static final String MESSAGE = "Invalid payment, the total received must be higher than products value.";
 
         public InvalidPaymentOperationException() {

@@ -58,7 +58,7 @@ public class CoinCombination {
     }
 
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public static class CoinExchangeCombinationInvalid extends RuntimeException {
+    public static class CoinExchangeCombinationInvalid extends IllegalArgumentException {
         private static final String MESSAGE = "Invalid exchange value for partition.";
 
         public CoinExchangeCombinationInvalid() {

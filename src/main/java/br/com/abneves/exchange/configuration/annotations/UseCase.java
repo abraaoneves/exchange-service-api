@@ -1,4 +1,4 @@
-package br.com.abneves.exchange.configuration;
+package br.com.abneves.exchange.configuration.annotations;
 
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;

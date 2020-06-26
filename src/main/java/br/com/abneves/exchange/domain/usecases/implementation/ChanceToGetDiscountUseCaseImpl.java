@@ -1,6 +1,6 @@
 package br.com.abneves.exchange.domain.usecases.implementation;
 
-import br.com.abneves.exchange.configuration.UseCase;
+import br.com.abneves.exchange.configuration.annotations.UseCase;
 import br.com.abneves.exchange.domain.usecases.ChanceToGetDiscountUseCase;
 import lombok.AllArgsConstructor;
 
