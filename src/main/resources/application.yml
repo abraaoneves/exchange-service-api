@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: "exchange-service-api"
+    # database
+  datasource:
+    url: ${JDBC_CONNECTION_URL}
+    username: ${JDBC_CONNECTION_USERNAME}
+    password: ${JDBC_CONNECTION_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+# server
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+    min-response-size: 1024
+
+  # management end-points
+management:
+  health:
+    mail:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include:
+          - metrics
+          - health
+          - info
