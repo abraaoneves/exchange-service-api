@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class PayerTest {
 
     @Test
@@ -25,8 +28,8 @@ public class PayerTest {
                 .build();
 
         Assertions.assertFalse(payer.getPayments().isEmpty());
-        Assertions.assertEquals(1, payer.getPayerId());
-        Assertions.assertEquals(90, payer.getPayments().get(0).getProductsValue());
+        assertEquals(1, payer.getPayerId());
+        assertEquals(90, payer.getPayments().get(0).getProductsValue());
     }
 
     @Test
@@ -36,7 +39,28 @@ public class PayerTest {
                 .payments(Collections.emptyList())
                 .build();
 
-        Assertions.assertTrue(payer.getPayments().isEmpty());
-        Assertions.assertEquals(1, payer.getPayerId());
+        assertTrue(payer.getPayments().isEmpty());
+        assertEquals(1, payer.getPayerId());
+    }
+
+
+    @Test
+    public void shouldBeIncrementTotalOfPayments() {
+        final var payer = Payer.builder()
+                .payerId(1L)
+                .totalOfPayments(null)
+                .payments(Collections.emptyList())
+                .build();
+
+        assertTrue(payer.getPayments().isEmpty());
+        assertEquals(1, payer.getPayerId());
+        assertEquals(0, payer.getTotalOfPayments());
+
+        payer.incrementTotalOfPayments();
+        assertEquals(1, payer.getTotalOfPayments());
+
+        payer.incrementTotalOfPayments();
+        assertEquals(2, payer.getTotalOfPayments());
+
     }
 }

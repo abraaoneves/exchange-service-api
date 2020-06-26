@@ -10,9 +10,11 @@ import lombok.Value;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExchangeRootResponse {
+
     Long paymentId;
     Integer productsValue;
     Integer totalReceived;
+    Integer discountAmount;
     ExchangeResponse exchange;
 
     public static class ExchangeRootResponseBuilder {

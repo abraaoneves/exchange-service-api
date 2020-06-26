@@ -22,6 +22,12 @@ class PayerServiceImpl implements PayerService {
                 .orElseThrow(() -> new PayerNotFoundException(failMessage));
     }
 
+    @Override
+    public void updateTotalPayments(final Payer payer) {
+        payer.incrementTotalOfPayments();
+        repository.save(payer);
+    }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public static class PayerNotFoundException extends RuntimeException {
         public PayerNotFoundException(String message) {
