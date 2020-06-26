@@ -48,12 +48,14 @@ public class PayerTest {
     public void shouldBeIncrementTotalOfPayments() {
         final var payer = Payer.builder()
                 .payerId(1L)
+                .version(1L)
                 .totalOfPayments(null)
                 .payments(Collections.emptyList())
                 .build();
 
         assertTrue(payer.getPayments().isEmpty());
-        assertEquals(1, payer.getPayerId());
+        assertEquals(1L, payer.getPayerId());
+        assertEquals(1L, payer.getVersion());
         assertEquals(0, payer.getTotalOfPayments());
 
         payer.incrementTotalOfPayments();

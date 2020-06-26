@@ -41,9 +41,8 @@ public class Exchange {
     public CoinOption getCoinOption() {
         return CoinOption.of(this.getExchange());
     }
-
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public static class InvalidPaymentForExchange extends RuntimeException {
+    public static class InvalidPaymentForExchange extends IllegalArgumentException {
         public InvalidPaymentForExchange(String message) {
             super(message);
         }
