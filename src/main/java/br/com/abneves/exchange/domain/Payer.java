@@ -24,7 +24,7 @@ import java.util.Objects;
 public class Payer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long payerId;
 
     @Version
