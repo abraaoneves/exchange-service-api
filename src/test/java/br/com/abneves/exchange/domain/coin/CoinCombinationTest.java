@@ -10,7 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CoinCombinationTest {
 
     @Test
-    @Timeout(value = 5, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Return a list of 3 combinations for valid exchange value")
     public void listOfCombination_shouldBeReturnListOfThreeCombinationsOfCoins_whenValidExchangeValueIsUsed() {
         final var coinCombination = CoinCombination.of();
@@ -23,7 +22,6 @@ class CoinCombinationTest {
     }
 
     @Test
-    @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Should throw exception when 1 for exchange value is set.")
     public void shouldThrowException_whenOneExchangeValueIsSet() {
         final var coinCombination = CoinCombination.of();
@@ -36,7 +34,6 @@ class CoinCombinationTest {
     }
 
     @Test
-    @Timeout(value = 150, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Return a list of 3 combinations for valid and big exchange value")
     public void listOfCombination_shouldBeReturnListOfThreeCombinationsOfCoins_whenValidAndBigExchangeValueIsUsed() {
         final var coinCombination = CoinCombination.of();
@@ -47,18 +44,16 @@ class CoinCombinationTest {
     }
 
     @Test
-    @Timeout(value = 1000, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Return a list of 3 combinations for valid and biggest exchange value")
     public void listOfCombination_shouldBeReturnListOfThreeCombinationsOfCoins_whenValidAndBiggestExchangeValueIsUsed() {
         final var coinCombination = CoinCombination.of();
-        coinCombination.findCoinsCombinations(849);
+        coinCombination.findCoinsCombinations(999);
 
         assertThat(coinCombination.getCombinations())
                 .hasSize(3);
     }
 
     @Test
-    @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Should throw exception when ZERO value for exchange is set.")
     public void shouldThrowException_whenZeroExchangeValueIsSet() {
         final var coinCombination = CoinCombination.of();
@@ -67,7 +62,6 @@ class CoinCombinationTest {
     }
 
     @Test
-    @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Should throw exception when ZERO value for exchange is set.")
     public void shouldThrowException_whenLessThenZeroExchangeValueIsSet() {
         final var coinCombination = CoinCombination.of();
@@ -76,11 +70,10 @@ class CoinCombinationTest {
     }
 
     @Test
-    @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
     @DisplayName("Should throw exception when BIGGER value for exchange is set.")
     public void shouldThrowException_whenBiggerExchangeValueIsSet() {
         final var coinCombination = CoinCombination.of();
 
-        Assertions.assertThrows(CoinCombination.CoinExchangeCombinationInvalid.class, () -> coinCombination.findCoinsCombinations(850));
+        Assertions.assertThrows(CoinCombination.CoinExchangeCombinationInvalid.class, () -> coinCombination.findCoinsCombinations(1000));
     }
 }

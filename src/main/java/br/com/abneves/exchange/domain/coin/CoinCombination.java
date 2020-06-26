@@ -26,7 +26,7 @@ public class CoinCombination {
             throw new CoinExchangeCombinationInvalid();
         }
 
-        if (exchangeValue >= 850) {
+        if (exchangeValue >= 1000) {
             throw new CoinExchangeCombinationInvalid("This exchange value is invalid, this value is too large for simple coins.");
         }
 
