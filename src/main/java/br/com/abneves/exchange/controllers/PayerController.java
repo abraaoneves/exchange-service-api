@@ -7,12 +7,14 @@ import br.com.abneves.exchange.controllers.vos.responses.PaymentResponse;
 import br.com.abneves.exchange.domain.Exchange;
 import br.com.abneves.exchange.domain.services.PaymentService;
 import br.com.abneves.exchange.domain.usecases.EffectPaymentUseCase;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.stream.Collectors;
@@ -28,6 +30,7 @@ public class PayerController {
     private final EffectPaymentUseCase effectPaymentUseCase;
 
     @GetMapping("/{payerId}/payments")
+    @ApiOperation("List of payments from payer")
     public ResponseEntity<PaymentPageDecorator<PaymentResponse>> listOfPaymentsFromPayer(@PathVariable("payerId") final Long payer,
                                                                                          @RequestParam(value = "page", defaultValue = "0") int page) {
         final var pageable = PageRequest.of(page, TOTAL_OF_PAGES);
@@ -41,6 +44,7 @@ public class PayerController {
     }
 
     @PostMapping(value = "/{payerId}/payments", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation("Effect payment from valid payer")
     public ResponseEntity<ExchangeRootResponse> doPayment(@PathVariable("payerId") final Long payer,
                                                           @RequestBody @Valid final PaymentRequest paymentRequest) {
         final var payment = effectPaymentUseCase.execute(payer, paymentRequest);
@@ -54,7 +58,13 @@ public class PayerController {
                 .discountAmount(payment.getDiscount())
                 .build();
 
-        return ResponseEntity.ok(response);
+        final var uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{payerId}/payments")
+                .buildAndExpand(payer)
+                .toUri();
+
+        return ResponseEntity.created(uri).body(response);
     }
 
 }
