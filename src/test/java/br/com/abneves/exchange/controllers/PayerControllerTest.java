@@ -110,7 +110,7 @@ public class PayerControllerTest {
         final var request = PaymentRequestCreator.generate();
         final var response = controller.doPayment(1L, request);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
         assertThat(response.getBody())
                 .extracting(ExchangeRootResponse::getPaymentId)
@@ -156,7 +156,7 @@ public class PayerControllerTest {
 
         final var response = controller.doPayment(1L, request);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody())
                 .extracting(ExchangeRootResponse::getProductsValue)
                 .isEqualTo(10);
