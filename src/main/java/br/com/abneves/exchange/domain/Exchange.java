@@ -4,6 +4,8 @@ import br.com.abneves.exchange.domain.coin.CoinOption;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.Objects;
+
 /**
  * Exchange
  *
@@ -24,7 +26,13 @@ public class Exchange {
 
     public Integer getExchange() {
         if (payment.isAllowedToExchange()) {
-            return payment.getTotalReceived() - payment.getProductsValue();
+            final var exchange = payment.getTotalReceived() - payment.getProductsValue();
+
+            if (Objects.nonNull(payment.getDiscount()) && payment.getDiscount() > 0) {
+                return exchange + payment.getDiscount();
+            }
+
+            return exchange;
         }
 
         throw new InvalidPaymentForExchange("Invalid value for exchange.");

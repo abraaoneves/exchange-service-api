@@ -31,6 +31,9 @@ public class Payment {
     @Column(name = "total_received")
     private Integer totalReceived;
 
+    @Column(name = "discount")
+    private Integer discount;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payer_fk_id", nullable = false)
     private Payer payer;

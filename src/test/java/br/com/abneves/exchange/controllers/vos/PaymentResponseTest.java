@@ -12,7 +12,7 @@ class PaymentResponseTest {
     @Test
     @DisplayName("Build generic response")
     public void shouldBeGenerateResponseByValues() {
-        final var response = PaymentResponse.of(1L, 10, 11);
+        final var response = PaymentResponse.of(1L, 10, 11, 0);
 
         assertThat(response.getPaymentId())
                 .isEqualTo(1L);
@@ -22,6 +22,9 @@ class PaymentResponseTest {
 
         assertThat(response.getTotalReceived())
                 .isEqualTo(11);
+
+        assertThat(response.getDiscountAmount())
+                .isEqualTo(0);
     }
 
     @Test
@@ -32,6 +35,7 @@ class PaymentResponseTest {
                 .payer(null)
                 .productsValue(10)
                 .totalReceived(11)
+                .discount(1)
                 .build();
 
         final var response = PaymentResponse.of(payment);
@@ -44,5 +48,8 @@ class PaymentResponseTest {
 
         assertThat(response.getTotalReceived())
                 .isEqualTo(11);
+
+        assertThat(response.getDiscountAmount())
+                .isEqualTo(1);
     }
 }

@@ -8,7 +8,8 @@ import br.com.abneves.exchange.creators.PaymentRequestCreator;
 import br.com.abneves.exchange.domain.Payer;
 import br.com.abneves.exchange.domain.Payment;
 import br.com.abneves.exchange.domain.services.PaymentService;
-import br.com.abneves.exchange.domain.services.implementation.PaymentServiceImpl.InvalidPaymentOperationException;
+import br.com.abneves.exchange.domain.usecases.EffectPaymentUseCase;
+import br.com.abneves.exchange.domain.usecases.implementation.EffectPaymentUseCaseImpl.InvalidPaymentOperationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,10 @@ public class PayerControllerTest {
     PayerController controller;
 
     @Mock
-    PaymentService service;
+    PaymentService paymentService;
+
+    @Mock
+    EffectPaymentUseCase useCase;
 
     private PaymentRequest request;
     private Payment payment;
@@ -53,10 +57,11 @@ public class PayerControllerTest {
                 .paymentId(1L)
                 .productsValue(125)
                 .totalReceived(135)
+                .discount(0)
                 .build();
 
-        when(service.listByPayer(1L, PageRequest.of(0, 5))).thenReturn(PaymentCreator.createPagesOfPaymentList());
-        when(service.listByPayer(2L, PageRequest.of(0, 5))).thenReturn(new PageImpl<>(Collections.emptyList()));
+        when(paymentService.listByPayer(1L, PageRequest.of(0, 5))).thenReturn(PaymentCreator.createPagesOfPaymentList());
+        when(paymentService.listByPayer(2L, PageRequest.of(0, 5))).thenReturn(new PageImpl<>(Collections.emptyList()));
     }
 
     @Test
@@ -100,7 +105,7 @@ public class PayerControllerTest {
     @Test
     @DisplayName("Should be return a exchange value and combinations of coins.")
     public void shouldBeReturnExchangeValueAndListOfCoins() {
-        when(service.pay(1L, this.request)).thenReturn(payment);
+        when(useCase.execute(1L, this.request)).thenReturn(payment);
 
         final var request = PaymentRequestCreator.generate();
         final var response = controller.doPayment(1L, request);
@@ -143,10 +148,11 @@ public class PayerControllerTest {
                 .paymentId(1L)
                 .totalReceived(11)
                 .productsValue(10)
+                .discount(0)
                 .payer(this.payer)
                 .build();
 
-        when(service.pay(1L, request)).thenReturn(payment);
+        when(useCase.execute(1L, request)).thenReturn(payment);
 
         final var response = controller.doPayment(1L, request);
 
@@ -178,7 +184,7 @@ public class PayerControllerTest {
         request.setProductsValue(10);
         request.setTotalReceived(5);
 
-        when(service.pay(1L, request)).thenThrow(InvalidPaymentOperationException.class);
+        when(useCase.execute(1L, request)).thenThrow(InvalidPaymentOperationException.class);
 
         assertThrows(InvalidPaymentOperationException.class, () -> controller.doPayment(1L, request));
     }

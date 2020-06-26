@@ -14,6 +14,7 @@ public class ExchangeTest {
                 .paymentId(1L)
                 .productsValue(productValue)
                 .totalReceived(customerPaymentValue)
+                .discount(null)
                 .build();
 
         final var exchange = Exchange.of(payment);
@@ -31,6 +32,7 @@ public class ExchangeTest {
                 .paymentId(1L)
                 .productsValue(productValue)
                 .totalReceived(customerPaymentValue)
+                .discount(0)
                 .build();
 
         final var exchange = Exchange.of(payment);
@@ -48,6 +50,7 @@ public class ExchangeTest {
                 .paymentId(1L)
                 .productsValue(productValue)
                 .totalReceived(customerPaymentValue)
+                .discount(0)
                 .build();
 
         final var exchange = Exchange.of(payment);

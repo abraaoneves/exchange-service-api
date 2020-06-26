@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Payer
@@ -26,6 +27,24 @@ public class Payer {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long payerId;
 
+    @Version
+    private Long version;
+
+    @Column(name = "total_of_payments")
+    private Integer totalOfPayments;
+
     @OneToMany(mappedBy = "payer")
     private List<Payment> payments;
+
+    public Integer getTotalOfPayments() {
+        if (Objects.isNull(this.totalOfPayments)) {
+            return 0;
+        }
+
+        return this.totalOfPayments;
+    }
+
+    public void incrementTotalOfPayments() {
+        this.totalOfPayments = this.getTotalOfPayments() + 1;
+    }
 }
