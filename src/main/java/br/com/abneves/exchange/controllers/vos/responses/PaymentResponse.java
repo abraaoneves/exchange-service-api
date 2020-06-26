@@ -1,4 +1,4 @@
-package br.com.abneves.exchange.controllers.vos.requests;
+package br.com.abneves.exchange.controllers.vos.responses;
 
 import br.com.abneves.exchange.domain.Payment;
 import lombok.Getter;
