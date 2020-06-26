@@ -2,31 +2,31 @@
 
 # Exchange Rest API Service
 
-Service construido para processamento e controle de troco. Esta documentacao, prove
-todas as informacoes necessarias para uso da API e tratamentos.
+Service construído para processamento e controle de troco. Esta documentação, prove
+todas as informações necessárias para uso da API e tratamentos.
 
 ## Funcionamento basico.
 
 Quando um pagador valido enviar um pagamento, o mesmo recebera retorno informando
-alternativas de troco caso exista, esta alternativas consideram o menor numero de 
-moedas possivel dando prioridade para os maiores valores, o pagador tambem tera a
-possibilidade de ganhar um desconto apos 2 pagamentos, chance eh de 17% no intervalo.
+alternativas de troco caso exista, esta alternativa consideram o menor numero de 
+moedas possível dando prioridade para os maiores valores, o pagador também tera a
+possibilidade de ganhar um desconto, apos 2 pagamentos, chance é de 17% no intervalo.
 
-Pagador pode cosultar de forma paginada todos os pagamentos realizados.
+Pagador pode consultar de forma paginada todos os pagamentos realizados.
 
 Para modo interativo utilize Swagger: **/swagger-ui.html**
 ## Developer
-Para usar localmente faca o clone do projeto e utilize o docker para subir banco de dados.
+Para usar localmente faça o clone do projeto e utilize o docker para subir banco de dados.
 
 `docker-compose up`
 
-Utilize maven para rodar localmente
+Utilize maven para utilizar localmente
 
 `mvn spring-boot:run` ou `./mvnw spring-boot:run`
 
 # REST API
 
-Descricao de uso API
+Descrição de uso API
 
 ## Lista de pagamentos
 
@@ -34,7 +34,7 @@ Descricao de uso API
 
 `GET /payer/{payer_id}/payments`
 
-Nao paginado
+Não paginado
 ```shell 
 curl --request GET 'http://localhost:8080/payers/1/payments'
 ```
@@ -107,7 +107,7 @@ curl --request GET 'http://localhost:8080/payers/1/payments?page=0'
         
  ### Pagamento para pagor invalido
  
- Quando um pagamento eh realizado para um pagador inexistente ocorre o seguinte
+ Quando um pagamento é realizado para um pagador inexistente tem o seguinte
  retorno.
  
  ### Request
@@ -137,7 +137,7 @@ curl --request GET 'http://localhost:8080/payers/1/payments?page=0'
     
  ### Pagamento valores invalidos
  
-Quando um pagamento eh enviado e nao possui valores corretos um erro eh informado.
+Quando um pagamento é enviado e nao possui valores corretos um erro é informado.
 Um pagmento pode ser considerado invalido quando.
 - Valor do produto eh inferior ao pagamento
 - Valor excede o limite maximo estabelecido (1000). Este limite foi considerado valido,
