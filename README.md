@@ -5,8 +5,6 @@
 Service construído para processamento e controle de troco. Esta documentação, prove
 todas as informações necessárias para uso da API e tratamentos.
 
-API LINK: http://ec2-3-135-214-245.us-east-2.compute.amazonaws.com:8080
-
 ## Funcionamento basico.
 
 Quando um pagador valido enviar um pagamento, o mesmo recebera retorno informando
